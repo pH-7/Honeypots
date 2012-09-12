@@ -31,7 +31,7 @@ class Sniff
      */
 
     // TRUE = Automatically banned all those who attempt to log into the admin.
-    const AUTO_IP_BLOCK = true;
+    const AUTO_IP_BLOCK = false;
 
     // Path where will be stored log files.
     const LOG_PATH = '../../_data/logs/attackers/';
@@ -143,7 +143,7 @@ class Sniff
      * Build the log message.
      *
      * @access protected
-     * @return this object
+     * @return object this
      */
      protected function setLogMsg()
      {
@@ -168,7 +168,7 @@ class Sniff
      * Write a log file with the hacher informations.
      *
      * @access protected
-     * @return this object
+     * @return object this
      */
     protected function writeFile()
     {
@@ -181,7 +181,7 @@ class Sniff
      * Blocking IP address.
      *
      * @access protected
-     * @return this object
+     * @return object this
      */
     protected function blockIp()
     {
@@ -193,14 +193,12 @@ class Sniff
      * Send an email.
      *
      * @access protected
-     * @return this object
+     * @return boolean Returns TRUE if the mail was successfully accepted for delivery, FALSE otherwise.
      */
     protected function sendMessage()
     {
         $sHeaders = "From: \"{$_SERVER['HTTP_HOST']}\" <{$_SERVER['SERVER_ADMIN']}>\r\n";
-        mail(self::EMAIL_ADDRESS, 'Reporting of the Fake Admin Honeypot', $this->_sContents, $sHeaders);
-
-        return $this;
+        return mail(self::EMAIL_ADDRESS, 'Reporting of the Fake Admin Honeypot', $this->_sContents, $sHeaders);
     }
 
 }
